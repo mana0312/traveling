@@ -1,1 +1,220 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>City App Template（JSON 驅動）</title>
+<style>
+  :root{--primary:#2196f3;--muted:#f5f5f5}
+  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial;background:var(--muted);}
+  header{background:var(--primary);color:#fff;padding:14px 16px;text-align:center;font-size:18px;position:sticky;top:0;z-index:1000}
+  nav{background:#1976d2;display:flex;justify-content:space-around;padding:10px;position:sticky;top:56px;z-index:999}
+  nav a{color:#fff;text-decoration:none}
+  .toolbar{display:flex;gap:10px;padding:12px;align-items:center;flex-wrap:wrap;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+  select,input[type=search]{padding:8px;border-radius:8px;border:1px solid #ddd;font-size:14px}
+  .container{padding:16px;padding-bottom:80px}
+  .hero{width:100%;height:260px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+  .section{background:#fff;padding:14px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:12px}
+  .spots-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:700px){.spots-grid{grid-template-columns:repeat(2,1fr)}}
+  .spot-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+  .spot-media{display:flex;gap:12px;padding:12px}
+  .spot-media img{width:120px;height:80px;object-fit:cover;border-radius:8px}
+  .spot-body{padding:8px}
+  .tag{display:inline-block;padding:6px 10px;border-radius:16px;background:#e3f2fd;color:#0b57a4;font-size:12px;margin-right:8px}
+  .meta{font-size:13px;color:#666;margin-top:8px}
+  .map-frame{border:0;width:100%;height:220px;border-radius:8px}
+  .controls-row{display:flex;gap:10px;align-items:center}
+  .btn{background:var(--primary);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+</style>
+</head>
+<body>
+<header id="pageTitle">目的地（JSON 驅動）</header>
+<nav>
+  <a href="index.html">首頁</a>
+  <a href="itineraries.html">行程</a>
+  <a href="destinations.html">目的地</a>
+  <a href="packing.html">行李清單</a>
+</nav>
+
+<div class="toolbar">
+  <div class="controls-row">
+    <label for="countrySel">國家</label>
+    <select id="countrySel"></select>
+  </div>
+  <div class="controls-row">
+    <label for="citySel">城市</label>
+    <select id="citySel"></select>
+  </div>
+  <div style="flex:1;display:flex;gap:8px;align-items:center">
+    <input id="searchInput" type="search" placeholder="搜尋：城市 / 區域 / 景點" style="width:100%">
+    <button class="btn" id="searchBtn">搜尋</button>
+  </div>
+  <div class="controls-row">
+    <label for="catFilter">景點分類</label>
+    <select id="catFilter"><option value="all">全部</option><option>寺廟</option><option>夜景</option><option>美食</option><option>親子</option></select>
+  </div>
+</div>
+
+<div class="container" id="app">
+  <!-- 內容由 JS 填入 -->
+</div>
+
+<script>
+// === 完整城市資料（範例） ===
+const CITY_DATA = {
+  japan: {
+    tokyo: {
+      slug:'Hokkaido', name:'北海道 Hokkaido', image:'https://www.visit-hokkaido.jp/lsc/upfile/article/0000/0329/329_1_l.jpg', intro:'銀白世界的城市。', areas:['札幌','小樽','函館','旭川','富良野','美瑛','知床','釧路','十勝'],
+      spots:[
+        {name:'新千歳空港', category:'機場', image:'https://tw.wamazing.com/media/wp-content/uploads/sites/4/2019/09/shinchitoseairporttaxfree_pixta_94252250_M-853x569.jpg.webp', hours:'開館5時/閉館21時', price:'免費',官網:"https://www.hokkaido-airports.com/ja/new-chitose/", mapQuery:'Shibuya Crossing'},
+        {name:'VESSEL INN SAPPORO NAKAJIMA PARKベッセルイン札幌中島公園', category:'飯店', image:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/28/eb/b8/caption.jpg?w=900&h=500&s=1', hours:'check in：14:00；check out：11:00', price:'立體停車場:1,500円(税込)/泊', mapQuery:'Tokyo Skytree'},
+        {name:'ムラサキスポーツ 札幌パルコ店', category:'運動用品店', image:'https://meocloud-image.s3.ap-northeast-1.amazonaws.com/images/cms/edited/companies/1105/stores/104755/20240929235347108.webp', hours:'一〜日10:00〜20:00', price:'停車場:當日在PARCO消費2000円（税込）以上，120分鐘免費', mapQuery:'Shibuya Crossing'},
+        {name:'サケのふるさと千歳水族館', category:'水族館', image:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800', hours:'10:00–19:00', price:'¥3200', mapQuery:'TeamLab Borderless Tokyo'},
+        {name:'築地市場（場外）', category:'美食', image:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800', hours:'05:00–14:00', price:'依店家', mapQuery:'Tsukiji Market'}
+      ]
+    },
+    osaka: {
+      slug:'osaka', name:'大阪 Osaka', image:'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=1400', intro:'美食之都與歡樂園地。', areas:['梅田','難波','心齋橋','天王寺'],
+      spots:[
+        {name:'大阪城', category:'文化', image:'https://images.unsplash.com/photo-1579546929312-6fbc2c6f3d8b?auto=format&fit=crop&w=800', hours:'09:00–17:00', price:'¥600', mapQuery:'Osaka Castle'},
+        {name:'道頓堀', category:'美食', image:'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800', hours:'全天', price:'依店家', mapQuery:'Dotonbori Osaka'},
+        {name:'環球影城', category:'親子', image:'https://images.unsplash.com/photo-1547473416-9be3d88d6f2c?auto=format&fit=crop&w=800', hours:'09:00–19:00', price:'¥8000', mapQuery:'Universal Studios Japan'}
+      ]
+    },
+    kyoto: {
+      slug:'kyoto', name:'京都 Kyoto', image:'https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?auto=format&fit=crop&w=1400', intro:'古都與四季美景。', areas:['祇園','嵐山','伏見','清水寺區'],
+      spots:[
+        {name:'清水寺', category:'寺廟', image:'https://images.unsplash.com/photo-1531225319826-3f1a3d0a1d0e?auto=format&fit=crop&w=800', hours:'06:00–18:00', price:'¥400', mapQuery:'Kiyomizu-dera'},
+        {name:'伏見稻荷', category:'寺廟', image:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Fushimi Inari Taisha'},
+        {name:'嵐山竹林', category:'自然', image:'https://images.unsplash.com/photo-1508274751196-4c4e4b2f5f6d?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Arashiyama Bamboo Grove'}
+      ]
+    }
+  },
+  korea: {
+    seoul: {
+      slug:'seoul', name:'首爾 Seoul', image:'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1400', intro:'流行與歷史並存。', areas:['明洞','弘大','東大門','江南'],
+      spots:[
+        {name:'景福宮', category:'寺廟', image:'https://images.unsplash.com/photo-1542444459-db4e92ef0e97?auto=format&fit=crop&w=800', hours:'09:00–18:00', price:'₩3000', mapQuery:'Gyeongbokgung Palace'},
+        {name:'首爾塔', category:'夜景', image:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800', hours:'10:00–23:00', price:'₩11000', mapQuery:'N Seoul Tower'},
+        {name:'東大門市場', category:'購物', image:'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800', hours:'10:30–05:00', price:'依店家', mapQuery:'Dongdaemun Market'}
+      ]
+    }
+  },
+  europe: {
+    paris: {
+      slug:'paris', name:'巴黎 Paris', image:'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1400', intro:'藝術與浪漫之都。', areas:['拉丁區','蒙馬特','塞納河畔'],
+      spots:[
+        {name:'艾菲爾鐵塔', category:'夜景', image:'https://images.unsplash.com/photo-1491553895911-0055a66b0a9a?auto=format&fit=crop&w=800', hours:'09:30–23:00', price:'€25', mapQuery:'Eiffel Tower'},
+        {name:'羅浮宮', category:'博物館', image:'https://images.unsplash.com/photo-1526481280698-88f1b7c9b7b1?auto=format&fit=crop&w=800', hours:'09:00–18:00', price:'€15', mapQuery:'Louvre Museum'}
+      ]
+    }
+  },
+  islands: {
+    okinawa: {
+      slug:'okinawa', name:'沖繩 Okinawa', image:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400', intro:'海島度假與潛水天堂。', areas:['那霸','北谷','恩納村'],
+      spots:[
+        {name:'美麗海水族館', category:'親子', image:'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=800', hours:'08:30–18:30', price:'¥1880', mapQuery:'Okinawa Churaumi Aquarium'},
+        {name:'國際通', category:'美食', image:'https://images.unsplash.com/photo-1533777324565-a040eb52fac2?auto=format&fit=crop&w=800', hours:'全天', price:'依店家', mapQuery:'Kokusai Dori Okinawa'}
+      ]
+    }
+  }
+};
+
+// === 初始與元件 ===
+const countrySel = document.getElementById('countrySel');
+const citySel = document.getElementById('citySel');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const catFilter = document.getElementById('catFilter');
+const app = document.getElementById('app');
+
+function init(){
+  // 填 country
+  countrySel.innerHTML = Object.keys(CITY_DATA).map(k=>`<option value="${k}">${capitalize(k)}</option>`).join('');
+  countrySel.onchange = populateCities;
+  citySel.onchange = ()=> renderCity(getSelectedCity());
+  searchBtn.onclick = doSearch;
+  searchInput.onkeydown = (e)=>{ if(e.key==='Enter') doSearch(); };
+  catFilter.onchange = ()=> renderCity(getSelectedCity());
+  populateCities();
+  renderCity(getSelectedCity());
+}
+
+function populateCities(){
+  const country = countrySel.value;
+  const cities = CITY_DATA[country] || {};
+  citySel.innerHTML = Object.keys(cities).map(k=>`<option value="${k}">${cities[k].name}</option>`).join('');
+}
+
+function getSelectedCity(){
+  const country = countrySel.value;
+  const cityKey = citySel.value;
+  return CITY_DATA[country][cityKey];
+}
+
+function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+// render city with spot cards (each spot has its own map)
+function renderCity(city){
+  if(!city) { app.innerHTML = '<div class="section">找不到城市資料</div>'; return; }
+  document.getElementById('pageTitle').textContent = city.name;
+
+  const spotCards = city.spots.filter(s=>{ const cat = catFilter.value; if(cat==='all') return true; return s.category===cat; })
+    .map(s=>`
+      <div class="spot-card">
+        <div class="spot-media">
+          <img src="${s.image}" alt="${s.name}">
+          <div class="spot-body">
+            <h3>${s.name} <span class="tag">${s.category}</span></h3>
+            <div class="meta">營業時間：${s.hours} &nbsp;｜&nbsp; 費用：${s.price}</div>
+          </div>
+        </div>
+        <div style="padding:12px;">
+          <iframe class="map-frame" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(s.mapQuery)}"></iframe>
+        </div>
+      </div>
+    `).join('\n');
+
+  const html = `
+    <img class="hero" src="${city.image}" alt="${city.name}">
+    <div class="section"><h2>城市介紹</h2><p>${city.intro}</p></div>
+    <div class="section"><h2>主要區域</h2><ul>${city.areas.map(a=>`<li>${a}</li>`).join('')}</ul></div>
+    <div class="section"><h2>熱門景點</h2><div class="spots-grid">${spotCards}</div></div>
+    <div class="section"><h2>建議交通</h2><p>建議使用當地交通卡與地鐵/巴士系統。請點選個別景點地圖以檢視路線。</p></div>
+  `;
+
+  app.innerHTML = html;
+}
+
+// 搜尋（城市 / 區域 / 景點）
+function doSearch(){
+  const kw = searchInput.value.trim().toLowerCase();
+  if(!kw) { renderCity(getSelectedCity()); return; }
+  // 搜尋城市名稱、區域、景點
+  const results = [];
+  for(const country of Object.keys(CITY_DATA)){
+    for(const key of Object.keys(CITY_DATA[country])){
+      const city = CITY_DATA[country][key];
+      if(city.name.toLowerCase().includes(kw) || city.areas.join(' ').toLowerCase().includes(kw) || city.spots.some(s=>s.name.toLowerCase().includes(kw))) {
+        results.push({country,key,city});
+      }
+    }
+  }
+  if(results.length===0){ app.innerHTML = '<div class="section">沒有找到相關目的地。</div>'; return; }
+  // 顯示搜尋結果（簡潔卡片）
+  app.innerHTML = `<div class="section"><h2>搜尋結果 (${results.length})</h2></div>` + results.map(r=>{
+    return `<div class="spot-card" onclick="selectAndRender('${r.country}','${r.key}')" style="cursor:pointer"><div class="spot-media"><img src="${r.city.image}"><div class="spot-body"><h3>${r.city.name}</h3><div class="meta">${r.city.intro}</div></div></div></div>`;
+  }).join('');
+}
+
+function selectAndRender(country,key){ countrySel.value = country; populateCities(); citySel.value = key; renderCity(getSelectedCity()); window.scrollTo({top:0,behavior:'smooth'}); }
+
+init();
+</script>
+</body>
+</html>
+
+
+
 
