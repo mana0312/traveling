@@ -1,0 +1,168 @@
+/* =========================
+   Reset & Base
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "Noto Sans TC", "Noto Sans JP", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================
+   App Container
+========================= */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* =========================
+   Header
+========================= */
+header {
+  background: #2196f3;
+  color: #ffffff;
+  padding: 16px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* =========================
+   Page Content
+========================= */
+.page {
+  padding: 16px;
+  padding-bottom: 80px; /* 預留底部導覽空間 */
+}
+
+/* =========================
+   Menu (Home)
+========================= */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.menu a {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s;
+}
+
+.menu a:active {
+  transform: scale(0.97);
+}
+
+/* =========================
+   Card
+========================= */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   Buttons
+========================= */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #2196f3;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+/* =========================
+   Forms
+========================= */
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  font-size: 16px; /* 防止 iOS 自動放大 */
+}
+
+/* =========================
+   List
+========================= */
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+/* =========================
+   Bottom Navigation
+========================= */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  background: #ffffff;
+  border-top: 1px solid #dddddd;
+}
+
+.bottom-nav a {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.bottom-nav a.active {
+  color: #2196f3;
+  font-weight: bold;
+}
+
+/* =========================
+   Utility
+========================= */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
