@@ -65,29 +65,1473 @@
 const CITY_DATA = {
   japan: {
     tokyo: {
-      slug:'Hokkaido', name:'北海道 Hokkaido', image:'https://www.visit-hokkaido.jp/lsc/upfile/article/0000/0329/329_1_l.jpg', intro:'銀白世界的城市。', areas:['札幌','小樽','函館','旭川','富良野','美瑛','知床','釧路','十勝'],
+      slug:'Hokkaido sapporo', name:'北海道 札幌', image:'https://www.visit-hokkaido.jp/lsc/upfile/article/0000/0329/329_1_l.jpg', intro:'銀白世界的城市。', areas:['札幌','小樽','函館','旭川','富良野','美瑛','知床','釧路','十勝'],
       spots:[
-        {name:'新千歳空港', category:'機場', image:'https://tw.wamazing.com/media/wp-content/uploads/sites/4/2019/09/shinchitoseairporttaxfree_pixta_94252250_M-853x569.jpg.webp', hours:'開館5時/閉館21時', price:'免費',官網:"https://www.hokkaido-airports.com/ja/new-chitose/", mapQuery:'Shibuya Crossing'},
-        {name:'VESSEL INN SAPPORO NAKAJIMA PARKベッセルイン札幌中島公園', category:'飯店', image:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/28/eb/b8/caption.jpg?w=900&h=500&s=1', hours:'check in：14:00；check out：11:00', price:'立體停車場:1,500円(税込)/泊', mapQuery:'Tokyo Skytree'},
-        {name:'ムラサキスポーツ 札幌パルコ店', category:'運動用品店', image:'https://meocloud-image.s3.ap-northeast-1.amazonaws.com/images/cms/edited/companies/1105/stores/104755/20240929235347108.webp', hours:'一〜日10:00〜20:00', price:'停車場:當日在PARCO消費2000円（税込）以上，120分鐘免費', mapQuery:'Shibuya Crossing'},
-        {name:'サケのふるさと千歳水族館', category:'水族館', image:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800', hours:'10:00–19:00', price:'¥3200', mapQuery:'TeamLab Borderless Tokyo'},
-        {name:'築地市場（場外）', category:'美食', image:'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800', hours:'05:00–14:00', price:'依店家', mapQuery:'Tsukiji Market'}
+{
+  name:'新千歳空港',
+  category:'機場',
+  image:'https://tw.wamazing.com/media/wp-content/uploads/sites/4/2019/09/shinchitoseairporttaxfree_pixta_94252250_M-853x569.jpg.webp',
+  hours:'開館5時/閉館21時',
+  price:'免費',
+  address:'北海道千歳市美々',
+  phone:'+81-123-23-0111',
+  website:'https://www.hokkaido-airports.com/ja/new-chitose/',
+  mapQuery:'新千歳空港'
+},
+{
+  name:'VESSEL INN SAPPORO NAKAJIMA PARKベッセルイン札幌中島公園',
+  category:'飯店',
+  image:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/28/eb/b8/caption.jpg?w=900&h=500&s=1',
+  hours:'check in：14:00；check out：11:00',
+  price:'立體停車場:1,500円(税込)/泊',
+  address:'〒064-0809札幌市中央区南九条西4丁目1番2号',
+  phone:'+81 11-513-0700',
+  website:'https://www.vessel-hotel.jp/inn/sapporo/',
+  mapQuery:'VESSEL INN SAPPORO NAKAJIMA PARKベッセルイン札幌中島公園'
+},
+{
+  name:'ムラサキスポーツ 札幌パルコ店',
+  category:'運動用品店',
+  image:'https://meocloud-image.s3.ap-northeast-1.amazonaws.com/images/cms/edited/companies/1105/stores/104755/20240929235347108.webp',
+  hours:'一〜日10:00〜20:00',
+  price:'停車場:當日在PARCO消費2000円（税込）以上，120分鐘免費',
+  address:'〒060-8502北海道札幌市中央区南1条西3丁目3番地 札幌パルコ4階',
+  phone:':011-219-4231',
+  website:'https://shop.murasaki.jp/detail/108/',
+  mapQuery:'ムラサキスポーツ 札幌パルコ店'
+},
+{
+  name:'ポケモンセンターサッポロ',
+  category:'札幌寶可夢中心',
+  image:'https://www.pokemon.co.jp/img/shop/pokecen/sapporo/mv-sapporo-1.jpg', 
+  hours:'一~日:10:00~20:00', 
+  price:'',
+  address:'〒060-0005札幌市中央区北5条西4-7大丸札幌店8階',
+  phone:'011-232-3212',
+  website:'https://www.pokemon.co.jp/shop/pokecen/sapporo/',
+  mapQuery:'ポケモンセンターサッポロ'
+ },
+{
+  name:'サケのふるさと千歳水族館',
+  category:'水族館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒066-0028北海道千歳市花園2丁目312',
+  phone:'0123-42-3001',
+  website:'https://chitose-aq.jp/',
+  mapQuery:'サケのふるさと千歳水族館'
+ },
+ {
+  name:'新さっぽろサンピアザ水族館 ',
+  category:'水族館水族館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒004-0052 北海道札幌市厚別区厚別中央2-5-7-5',
+  phone:'011-890-2455',
+  website:'https://www.sunpiazza-aquarium.com/',
+  mapQuery:'新さっぽろサンピアザ水族館'
+ },
+ {
+  name:'AOAO SAPPORO',
+  category:'水族館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0062北海道札幌市中央区南2条西3丁目20 moyuk SAPPORO 4階-6階',
+  phone:'011-212-1316',
+  website:'https://aoao-sapporo.blue/',
+  mapQuery:'AOAO SAPPORO'
+ },
+ {
+  name:'札幌市円山動物園',
+  category:'動物園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒064-0959 札幌市中央区宮ケ丘3番地1',
+  phone:'011-621-1426',
+  website:'https://www.city.sapporo.jp/zoo/',
+  mapQuery:'札幌市円山動物園'
+ },
+ {
+  name:'札幌手稻滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒006-0029 札幌市手稲区手稲本町593',
+  phone:'011-682-6000/滑雪教室:011-685-7000',
+  website:'https://sapporo-teine.com/snow/',
+  mapQuery:'札幌手稲スキー場 サッポロテイネ'
+ },
+ {
+  name:'札幌國際滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒061-2301 札幌市南区定山渓937番地先',
+  phone:'011-598-4511',
+  website:'https://www.sapporo-kokusai.jp/',
+  mapQuery:'札幌国際スキー場'
+ },
+ {
+  name:'新雪谷 Annupuri 滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒066-0068 北海道千歳蘭越26番地',
+  phone:'0123-27-2121',
+  website:'https://www.niseko.ne.jp/ja/',
+  mapQuery:'ニセコスキー場'
+ },
+ {
+  name:'富良野滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒076-8511北海道富良野市中御料',
+  phone:'0167-22-1111',
+  website:'https://www.princehotels.co.jp/ski/furano/winter/',
+  mapQuery:'富良野スキー場'
+ },
+ {
+  name:'星野渡假村 Tomamu滑雪場(星野リゾート トマムスキー場)',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道勇払郡占冠村中トマム',
+  phone:'0167-58-1111',
+  website:'https://www.snowtomamu.jp/winter/ski/',
+  mapQuery:'星野リゾート トマムスキー場'
+ },
+ {
+  name:'札幌藻岩山滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒005-0040 札幌市南区藻岩下1991',
+  phone:'050-3662-8715(札幌藻岩山スキー場管理事務所)',
+  website:'https://sapporo-moiwa.jp/',
+  mapQuery:'札幌藻岩山スキー場'
+ },
+ {
+  name:'大倉山展望台(大倉山ジャンプ競技場)',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒064-0958 北海道札幌市中央区宮の森1274',
+  phone:'011-641-8585(大倉山総合案内所（ジャンプ競技場内）)',
+  website:'https://okurayama-jump.jp/',
+  mapQuery:'大倉山ジャンプ競技場'
+ },
+ {
+  name:'定山溪三笠滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒061-2303 北海道札幌市南区定山渓温泉西3丁目',
+  phone:'011-598-2173',
+  website:'https://jozankei.jp/activity/mikasa-ski/',
+  mapQuery:'定山渓三笠スキー場'
+ },
+ {
+  name:'小樽天狗山纜車、滑雪場',
+  category:'滑雪場',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒047-0023 北海道小樽市最上2丁目16-15',
+  phone:'0134-33-7381',
+  website:'https://tenguyama.ckk.chuo-bus.co.jp/',
+  mapQuery:'小樽天狗山ロープウエイ・スキー場'
+ },
+ {
+  name:'国営滝野すずらん丘陵公園スノーワールド',
+  category:'設施玩雪-雪橇&越野滑雪',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道札幌市南区滝野247',
+  phone:'011-592-3333',
+  website:'',
+  mapQuery:'国営滝野すずらん丘陵公園スノーワールド'
+ },
+ {
+  name:'モエレ沼公園',
+  category:'設施玩雪-雪橇&越野滑雪',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'007-0011北海道札幌市東区モエレ沼公園1-1',
+  phone:'011-790-1231',
+  website:'https://moerenumapark.jp/',
+  mapQuery:'モエレ沼公園'
+ },
+ {
+  name:'北方雪上樂園(ノース・スノーランド in 千歳 ',
+  category:'設施玩雪-雪橇&越野滑雪',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒066-0068 北海道千歳蘭越26番地',
+  phone:'0123-27-2121',
+  website:'https://www.northsnowland.com/',
+  mapQuery:'ノース・スノーランド in 千歳'
+ },
+ {
+  name:'國營瀧野鈴蘭丘陵公園',
+  category:'設施玩雪-雪橇&越野滑雪',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市南区滝野247',
+  phone:'011-592-3333（滝野公園案内所）',
+  website:'',
+  mapQuery:'国営滝野すずらん丘陵公園'
+ },
+ {
+  name:'茨戸川ワカサギ釣り',
+  category:'公魚垂釣',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'https://www.dolphins.gr.jp/sapporo-wakasagi/',
+  mapQuery:''
+ },
+ {
+  name:'氷濤 氷の美術館',
+  category:'千歳・支笏湖氷濤祭典',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道千歳市支笏湖温泉',
+  phone:'0123-23-8288',
+  website:'https://hyoutou-special.asia/',
+  mapQuery:'冰の美術館'
+ },
+ {
+  name:'定山渓温泉',
+  category:'溫泉',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市南区定山渓温泉東3丁目',
+  phone:'011-598-2012（一般社団法人 定山渓観光協会）',
+  website:'https://jozankei.jp/',
+  mapQuery:'定山溪温泉'
+ },
+ {
+  name:'豐平峽溫泉',
+  category:'溫泉',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道札幌市南区定山渓608−2',
+  phone:'011-598-2410',
+  website:'https://hoheikyo.co.jp/',
+  mapQuery:'豐平峽溫泉'
+ },
+ {
+  name:'支笏湖温泉',
+  category:'溫泉',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒066-0281 北海道千歲市支笏湖溫泉',
+  phone:'0123-25-2404（支笏湖遊客中心）',
+  website:'https://lake-shikotsu.jp/',
+  mapQuery:'支笏湖温泉'
+},
+{
+  name:'藻岩山',
+  category:'纜車山頂看夜景',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区伏見5丁目3-7',
+  phone:'011-561-8177',
+  website:'https://mt-moiwa.jp/',
+  mapQuery:'札幌もいわ山ロープウェイ'
+},
+{
+  name:'藻岩山纜車山麓駅入口',
+  category:'纜車',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区伏見5丁目3-7',
+  phone:'011-561-8177',
+  website:'https://mt-moiwa.jp/',
+  mapQuery:'札幌もいわ山ロープウェイ'
+},
+{
+  name:'羊之丘展望台',
+  category:'瞭望&玩雪',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒062-0045北海道札幌市豊平区羊ケ丘1番地',
+  phone:'011-851-3080',
+  website:'https://www.hitsujigaoka.jp/',
+  mapQuery:'さっぽろ羊ヶ丘展望台'
+},
+{
+  name:'JR塔展望室T38',
+  category:'全景瞭望台',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区北5条西2丁目5番地',
+  phone:'11-209-5500',
+  website:'https://www.jr-tower.com/t38',
+  mapQuery:'JRタワー展望室タワー・スリーエイト'
+},
+{
+  name:'白色戀人公園',
+  category:'體驗觀光工廠&夜晚燈光秀',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒063-0052北海道札幌市⻄区宮の沢2-2-11-36',
+  phone:'011-666-1481',
+  website:'https://www.shiroikoibitopark.jp/',
+  mapQuery:'白い恋人パーク'
+},
+{
+  name:'さっぽろホワイトイルミネーション 大通会場',
+  category:'活動',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区大通公園1丁目～11丁目',
+  phone:'011-281-6400',
+  website:'https://www.snowfes.com/',
+  mapQuery:'さっぽろホワイトイルミネーション 大通会場'
+},
+{
+  name:'さっぽろ雪まつり すすきの会場',
+  category:'活動',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区南4条～南6条までの西3・4丁目（札幌駅前通）',
+  phone:'011-281-6400',
+  website:'https://www.snowfes.com/',
+  mapQuery:'さっぽろ雪まつり すすきの会場'
+},
+{
+  name:'さっぽろ雪まつり つどーむ会場',
+  category:'活動',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市東区栄町885-1',
+  phone:'011-281-6400',
+  website:'https://www.snowfes.com/',
+  mapQuery:'さっぽろ雪まつり つどーむ会場'
+},
+{
+  name:'札幌市時計台',
+  category:'夜晚燈光秀',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区北1条西2丁目',
+  phone:'011-231-0838',
+  website:'https://sapporoshi-tokeidai.jp/',
+  mapQuery:'札幌市時計台'
+},
+{
+  name:'札幌電視塔',
+  category:'夜晚燈光秀',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0042 札幌市中央区大通西1丁目',
+  phone:'011-241-1131',
+  website:'https://www.tv-tower.co.jp/en/',
+  mapQuery:'さっぽろテレビ塔'
+},
+{
+  name:'大通公園',
+  category:'夜晚燈光秀',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区大通西1丁目～12丁目',
+  phone:'011-251-0438',
+  website:'https://odori-park.jp/',
+  mapQuery:'大通公園'
+},
+{
+  name:'札幌市北3條廣場',
+  category:'夜晚燈光秀',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0003札幌市中央区北3条西3丁目1番地',
+  phone:'011-211-6406',
+  website:'https://www.kita3jo-plaza.jp/',
+  mapQuery:'札幌市北3条広場'
+},
+{
+  name:'定山溪神社',
+  category:'神社',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市南区定山渓温泉東３丁目',
+  phone:'011-598-2012(一般社団法人 定山渓観光協会)',
+  website:'https://jozankei.jp/spot/181/',
+  mapQuery:'定山溪神社'
+},
+{
+  name:'札幌護国神社',
+  category:'神社',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒064-0915北海道札幌市中央区南15条西5丁目1−1',
+  phone:'011-511-5421',
+  website:'https://sapporo-gokoku.jp/',
+  mapQuery:'札幌護国神社'
+},
+{
+  name:'北海道神宮',
+  category:'神社',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒064-8505札幌市中央区宮ケ丘474番地',
+  phone:'011-611-0261',
+  website:'http://www.hokkaidojingu.or.jp/',
+  mapQuery:'北海道神宮'
+},
+{
+  name:'西野神社',
+  category:'神社',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒063-0021札幌市西区平和1条3丁目',
+  phone:'011-661-8880',
+  website:'https://nishinojinja.or.jp/',
+  mapQuery:'西野神社'
+},
+{
+  name:'諏訪神社',
+  category:'神社',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒065-0012札幌市東区北12条東1丁目1番10号',
+  phone:'011-711-0960',
+  website:'https://www.sapporo-suwajinja.com/',
+  mapQuery:'札幌諏訪神社'
+},
+{
+  name:'紅磚平臺(赤れんが テラス)',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0002北海道札幌市中央区北2条西4丁目1番地',
+  phone:'011-211-6200',
+  website:'https://mitsui-shopping-park.com/urban/akatera/',
+  mapQuery:'赤れんがテラス'
+},
+{
+  name:'札幌Stellar Place',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0005札幌市中央区北5条西2丁目',
+  phone:':011-209-5100',
+  website:'https://www.stellarplace.net/',
+  mapQuery:'札幌ステラプレイス'
+},
+{
+  name:'札幌工廠',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央區北2條東4丁目 060-0032',
+  phone:'011-207-5000',
+  website:'https://sapporofactory.jp/',
+  mapQuery:'サッポロファクトリー'
+},
+{
+  name:'COCONOSUSUKINO',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道札幌市中央区南4条⻄4丁目1番1p',
+  phone:'050-6868-5075(TOHOシネマズ すすきの)/011-596-0097(ココノススキノ コールセンター)',
+  website:'https://cocono-susukino.jp/',
+  mapQuery:'COCONOSUSUKINO'
+},
+{
+  name:'丸井今井札幌本店 大通館',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-8667 札幌市中央区南1条西2丁目',
+  phone:'011-205-1151',
+  website:'https://www.maruiimai.mistore.jp/sapporo.html',
+  mapQuery:'丸井今井札幌本店 大通館'
+},
+{
+  name:'moyuk SAPPORO',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0062北海道札幌市中央区南2条西3丁目20番地',
+  phone:'011-213-0037',
+  website:'https://moyuk.jp/',
+  mapQuery:'moyuk SAPPORO'
+},
+{
+  name:'ノルベサ',
+  category:'購物中心',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0063札幌市中央区南3条西5丁目1-1',
+  phone:'011-271-3630(ノルベサ運営事務所)',
+  website:'https://www.norbesa.jp/',
+  mapQuery:'ノルベサ'
+},
+{
+  name:'北海道廳紅磚廳舍（舊本廳舍）',
+  category:'夜晚燈光秀&古老紅瓦建築',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0003北海道札幌市中央区北３条西６丁目１赤レンガ庁舎1F',
+  phone:'(011)206-8390',
+  website:'https://www.hokkaido-redbrick.jp/',
+  mapQuery:'北海道庁旧本庁舎（赤れんが庁舎)'
+},
+{
+  name:'北海道開拓村',
+  category:'明治、大正昭和初期建築',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒004-0006札幌市厚別区厚別町小野幌50-1',
+  phone:'011-898-2692',
+  website:'https://www.kaitaku.or.jp/',
+  mapQuery:'北海道開拓村'
+},
+{
+  name:'北海道博物館（北海道開拓紀念館）',
+  category:'博物館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒004-0006北海道札幌市厚別区厚別町小野幌53-2',
+  phone:'011-898-0466（総合案内）',
+  website:'https://www.hm.pref.hokkaido.lg.jp/',
+  mapQuery:'北海道立総合博物館'
+},
+{
+  name:'前田森林公園',
+  category:'公園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市手稲区手稲前田591',
+  phone:'011-681-3940',
+  website:'https://www.sapporo.travel/spot/facility/maeda_forest_park/',
+  mapQuery:'前田森林公園'
+},
+{
+  name:'札幌芸術の森 アートホール',
+  category:'公園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒005-0864札幌市南区芸術の森2丁目75番地',
+  phone:'011-592-5111(代表)/011-591-0090(札幌芸術の森美術館)/011-592-4122(クラフト工房)',
+  website:'https://artpark.or.jp/',
+  mapQuery:'札幌芸術の森 アートホール'
+},
+{
+  name:'圓山公園',
+  category:'公園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'064-0959札幌市中央区宮ヶ丘3',
+  phone:'011-621-0453（円山公園パークセンター)',
+  website:'https://maruyamapark.jp/',
+  mapQuery:'円山公園'
+},
+{
+  name:'旭山紀念公園',
+  category:'公園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区界川4丁目',
+  phone:'011-200-0311（旭山記念公園管理事務所)',
+  website:'https://www.sapporo-park.or.jp/asahiyama/',
+  mapQuery:'旭山記念公園'
+},
+{
+  name:'豐平館',
+  category:'高級西洋賓館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒064-0931北海道札幌市中央区中島公園1番20号',
+  phone:'（011）211-1951',
+  website:'https://www.s-hoheikan.jp/',
+  mapQuery:'豊平館'
+},
+{
+  name:'サッポロさとらんど',
+  category:'花園&農作物採收體驗',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市東区丘珠町584-2',
+  phone:'011-787-0223',
+  website:'https://www.satoland.com/',
+  mapQuery:'サッポロさとらんど'
+},
+{
+  name:'幌見峠ラベンダー園',
+  category:'薰衣草花園',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区盤渓471番地110（幌見峠頂上）',
+  phone:'011-622-5167',
+  website:'https://yumekoubousatou.com/lavender.htm',
+  mapQuery:'幌見峠のラベンダー園'
+},
+{
+  name:'サッポロビール園',
+  category:'啤酒館',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒065-0007 札幌市東区北7条東9丁目2-10',
+  phone:'0570-098-346',
+  website:'https://sapporo-bier-garten.jp/',
+  mapQuery:'サッポロビール園'
+},
+{
+  name:'札幌市中央批發市場',
+  category:'海鮮市場&美食',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0012北海道札幌市中央区北１２条西２０丁目２－１',
+  phone:'011-611-3111',
+  website:'https://www.sapporo-market.gr.jp/',
+  mapQuery:'札幌市中央卸売市場'
+},
+{
+  name:'二條市場',
+  category:'海鮮市場&美食',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道中央区南3条東1～2丁目',
+  phone:'011-222-5308',
+  website:'https://nijomarket.com/en/top_en/',
+  mapQuery:'さっぽろ二条市場'
+},
+{
+  name:'Susukino Street',
+  category:'市區街道-美食街&酒',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'北海道札幌市中央区',
+  phone:'011-518-2005(一般社団法人 すすきの観光協会)',
+  website:'http://www.susukino-ta.jp/',
+  mapQuery:'Susukino Street'
+},
+{
+  name:'さっぽろ地下街',
+  category:'市區街道-美食街&酒',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0042札幌市中央区大通西1丁目～3丁目(オーロラタウン)/札幌市中央区南1条西3丁目～南4条西3丁目(ポールタウン)',
+  phone:'011-221-3639(オーロラタウン)/011-221-6657(ポールタウン)',
+  website:'https://www.sapporo-chikagai.jp/',
+  mapQuery:'さっぽろ地下街 オーロラタウン'
+},
+{
+  name:'狸小路商店街',
+  category:'市區街道-美食街&酒',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区南2・3条西1～7丁目',
+  phone:'011-241-5125（札幌狸小路商店街振興組合）',
+  website:'https://tanukikoji.or.jp/',
+  mapQuery:'狸小路商店街'
+},
+{
+  name:'狸COMICHI',
+  category:'市區街道-美食街&酒',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'札幌市中央区南2条西2丁目5',
+  phone:':',
+  website:'https://tanukicomichi.com/',
+  mapQuery:'狸COMICHI'
+},
+{
+  name:'千歲鶴酒博物館',
+  category:'釀酒廠',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0053 札幌市中央区南3条東５丁目2番地',
+  phone:'011-221-7106',
+  website:'https://nipponseishu.co.jp/chitosetsuru/museum/',
+  mapQuery:'千歳鶴酒ミュージアム'
+},
+{
+  name:'BREWERY1876',
+  category:'釀酒廠',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0032北海道札幌市中央区北2条東4サッポロファクトリーレンガ館 1F',
+  phone:'050-5448-6290',
+  website:'https://brewery1876.com/',
+  mapQuery:'BREWERY1876'
+},
+{
+  name:'北海道大學',
+  category:'大學',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'〒060-0808北海道札幌市北区北8条西5丁目',
+  phone:'011-716-2111',
+  website:'https://www.hokudai.ac.jp/',
+  mapQuery:'北海道大学'
+},
+{
+  name:'奥芝商店実家',
+  category:'湯咖哩',
+  image:'', 
+  hours:'11:00~15:00(L.O.)、17:00~20:30(L.O.)；店休:一', 
+  price:'',
+  address:'札幌市中央区南1条西5丁目16プレジデント松井ビル100',
+  phone:'011-596-6552',
+  website:'https://okushiba.net/',
+  mapQuery:'奥芝商店実家'
+},
+{
+  name:'生ラムジンギスカン 新なるぼんず すすきの本店',
+  category:'成吉思汗烤羊肉',
+  image:'', 
+  hours:'一～五: 17:00～隔天0:00(料理L.O. 23:30 飲料L.O. 23:30） 六、日、國定: 12:00～隔天0:00(料理L.O. 23:30 飲料L.O. 23:30)', 
+  price:'肉質軟嫩到像是可以喝的成吉思汗羊肉:1,749円(含稅)；嫩羔羊肉4種各2切薄片:2,079円；嫩羔羊肉:1,749円；前菜(泡菜):539円；重瓣胃(牛百葉/毛肚):979円；毛豆:429円；韓国海苔:330円；涼拌豆腐:319円；小黃瓜:429円；羊肉片:869円；小羔羊肉:1,089円',
+  address:'北海道札幌市中央区南4条西4丁目2番地 南4西4ビル1階 ',
+  phone:'+81 11-206-1015',
+  website:'https://akr3385859945.owst.jp/',
+  mapQuery:'生ラムジンギスカン 新なるぼんず すすきの本店'
+},
+{
+  name:'炉ばた焼ウタリ',
+  category:'爐端燒考烤魚店',
+  image:'', 
+  hours:'17：00～23：00※餐點最後加點到閉店前1小時、飲料最後加點到閉店前30分鐘；店休:日・年末年始', 
+  price:'服務費:440円；大翅鮶鮋(吉次鱼/海中紅寶石):6,300円；遠東多線魚(花魚):2,230円；柳葉魚:1,210円；冰下魚:660円；堪察加擬石蟹腳:2,430円；帆立貝:1,100円；魷魚:1,430円；蝦2尾:990円；三種魚生魚片: 2,310円；產地水煮毛蟹1/4:3,300円。味噌醃漬烤牛菲力:1,760円',
+  address:'札幌市中央区南5条西5丁目',
+  phone:'011-512-3570',
+  website:'https://suginome.jp/shop/utari',
+  mapQuery:'炉ばた焼ウタリ'
+},
+{
+  name:' 麵屋 彩未',
+  category:'拉麵',
+  image:'', 
+  hours:'[二〜四]11：00～15：15；[五〜日]11：00～15：15、17：00～19：30', 
+  price:'味噌拉麵:1,000円；醤油拉麵:1,000円；塩拉麵:1,000円',
+  address:'北海道札幌市豊平区美園10条5-3-12',
+  phone:'011-820-6511',
+  website:'https://www.menya-saimi.com/',
+  mapQuery:'麺屋彩未'
+},
+{
+  name:'札幌ザンギ本舗 札幌駅北口店',
+  category:'唐揚炸機專賣店',
+  image:'', 
+  hours:'11:30～23:30(L.O:23:00)', 
+  price:'唐揚炸雞(1盤4個):692円（含稅）；半身唐揚嫩雞:1099円（含稅）；雞翅膀(塩)1隻:164円（含稅）；醃鯖魚:989円（含稅）；煎餃(4個):439円（含稅）；下酒菜(酥脆雞皮烤串):85円（含稅）；拉麵:550円(含稅)',
+  address:'北海道札幌市北区北8条西4-13-3 金子ビル 1F',
+  phone:'050-5385-3490',
+  website:'https://zangi.fuhdo.jp/sapporo/',
+  mapQuery:'札幌ザンギ本舗 札幌駅北口店'
+},
+{
+  name:'十勝豚丼 いっぴん 札幌車站店(十勝豚丼いっぴん ステラプレイス店)',
+  category:'豬肉丼飯',
+  image:'https://butadon-ippin.com/wp/wp-content/uploads/2023/02/SSD1878_%E8%B1%9A%E4%B8%BC-1024x683.jpg', 
+  hours:'１１：００～２２：００（L.O.２１：３０）', 
+  price:'豬肉丼:1,150円；特大豬肉丼(只有肉片變大):1,500円；豬肉丼(半分):740円；豬肉丼三昧:1250(含稅) ',
+  address:'〒060-0035 北海道札幌市中央区北5条西2丁目5番地ステラプレイス センター6階',
+  phone:'011-209-5298',
+  website:'https://butadon-ippin.com/',
+  mapQuery:'十勝豚丼いっぴん ステラプレイス店'
+},
       ]
     },
-    osaka: {
-      slug:'osaka', name:'大阪 Osaka', image:'https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&fit=crop&w=1400', intro:'美食之都與歡樂園地。', areas:['梅田','難波','心齋橋','天王寺'],
+ osaka: {
+      slug:'Hokkaido otaru', name:'北海道 小樽', image:'https://d1grca2t3zpuug.cloudfront.net/2024/11/otaruwinter-870x500-1750320185.webp', intro:'歷史港都。', areas:['梅田','難波','心齋橋','天王寺'],
       spots:[
-        {name:'大阪城', category:'文化', image:'https://images.unsplash.com/photo-1579546929312-6fbc2c6f3d8b?auto=format&fit=crop&w=800', hours:'09:00–17:00', price:'¥600', mapQuery:'Osaka Castle'},
-        {name:'道頓堀', category:'美食', image:'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=800', hours:'全天', price:'依店家', mapQuery:'Dotonbori Osaka'},
-        {name:'環球影城', category:'親子', image:'https://images.unsplash.com/photo-1547473416-9be3d88d6f2c?auto=format&fit=crop&w=800', hours:'09:00–19:00', price:'¥8000', mapQuery:'Universal Studios Japan'}
+{
+  name:'小樽運河',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽雪あかりの路',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北一硝子',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'おたる水族館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽オルゴール堂 本館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'日本銀行旧小樽支店 金融資料館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽運河クルーズ',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽天狗山ロープウェイ',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'祝津パノラマ展望台',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽芸術村',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽市総合博物館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'堺町通り',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'旭展望台',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'船見坂',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'スノークルーズオーンズ',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'青の洞窟',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽キャンドル工房',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'大正硝子館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北一ヴェネツィア美術館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'運河公園',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北のウォール街',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'旧国鉄手宮線',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'メルヘン交差点',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'三号館北一ホール',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'住吉神社',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'地獄坂',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北一硝子三号館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'にしん御殿 小樽貴賓館（旧青山別邸）',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'かま栄',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'田中酒造 亀甲蔵',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'おたる政寿司 本店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北海道小樽 伊勢鮨',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'魚真',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'味処たけだ（小樽三角市場）',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽寿司屋通り',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'北菓楼 小樽本館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽洋菓子舗ルタオ本店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'あまとう 本店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'洋菓子の館',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽倉庫No.1',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'オーセントホテル小樽　トップ・ラウンジ　ポールスター',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'らく天',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'花園エリア（レトロな飲み屋街）',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'鶏屋 鳳',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'らーめん みかん',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'らーめん渡海家',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'らーめん初代 小樽本店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'三角市場',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'南樽市場',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'新南樽市場',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'鱗友朝市',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'若鶏時代なると 本店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'小樽バイン',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'かま栄工場直売店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'中華食堂 桂苑',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
+{
+  name:'ヴィクトリアステーション 小樽稲穂店',
+  category:'',
+  image:'', 
+  hours:'', 
+  price:'',
+  address:'',
+  phone:':',
+  website:'',
+  mapQuery:''
+},
       ]
     },
     kyoto: {
-      slug:'kyoto', name:'京都 Kyoto', image:'https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?auto=format&fit=crop&w=1400', intro:'古都與四季美景。', areas:['祇園','嵐山','伏見','清水寺區'],
+      slug:'Hokkaido hakodate', name:'北海道 函館', image:'https://www.hakodate.travel/cht/wp-content/uploads/2022/12/hakodate-goryokaku-snow-221205-1024x680.jpg', intro:'從港口異國風情建築到江戶幕府時期的五稜郭公園。', areas:['','','',''],
       spots:[
-        {name:'清水寺', category:'寺廟', image:'https://images.unsplash.com/photo-1531225319826-3f1a3d0a1d0e?auto=format&fit=crop&w=800', hours:'06:00–18:00', price:'¥400', mapQuery:'Kiyomizu-dera'},
-        {name:'伏見稻荷', category:'寺廟', image:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Fushimi Inari Taisha'},
-        {name:'嵐山竹林', category:'自然', image:'https://images.unsplash.com/photo-1508274751196-4c4e4b2f5f6d?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Arashiyama Bamboo Grove'}
+        {name:'五稜星の夢燈光秀', category:'活動', image:'https://images.unsplash.com/photo-1531225319826-3f1a3d0a1d0e?auto=format&fit=crop&w=800', hours:'06:00–18:00', price:'¥400', mapQuery:'Kiyomizu-dera'},
+        {name:'函館燈光秀', category:'活動', image:'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Fushimi Inari Taisha'},
+        {name:'函館湯之川冬的點燈', category:'活動', image:'https://images.unsplash.com/photo-1508274751196-4c4e4b2f5f6d?auto=format&fit=crop&w=800', hours:'全天', price:'免費', mapQuery:'Arashiyama Bamboo Grove'}
       ]
     }
   },
@@ -167,11 +1611,23 @@ function renderCity(city){
           <img src="${s.image}" alt="${s.name}">
           <div class="spot-body">
             <h3>${s.name} <span class="tag">${s.category}</span></h3>
-            <div class="meta">營業時間：${s.hours} &nbsp;｜&nbsp; 費用：${s.price}</div>
+            <div class="meta">
+  ${s.hours ? `🕒 營業時間：${s.hours}<br>` : ''}
+  ${s.price ? `💰 費用：${s.price}<br>` : ''}
+  ${s.address ? `📍 地址：${s.address}<br>` : ''}
+  ${s.phone ? `📞 電話：<a href="tel:${s.phone}">${s.phone}</a><br>` : ''}
+  ${s.website ? `🌐 官網：<a href="${s.website}" target="_blank" rel="noopener">官方網站</a>` : ''}
+</div>
+
           </div>
         </div>
         <div style="padding:12px;">
-          <iframe class="map-frame" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(s.mapQuery)}"></iframe>
+          <iframe
+  class="map-frame"
+  loading="lazy"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps?q=${encodeURIComponent(s.mapQuery)}&output=embed">
+</iframe>
         </div>
       </div>
     `).join('\n');
@@ -214,6 +1670,15 @@ init();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
