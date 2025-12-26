@@ -166,3 +166,64 @@ li {
 .mt-2 { margin-top: 16px; }
 .mb-1 { margin-bottom: 8px; }
 .mb-2 { margin-bottom: 16px; }
+
+/* =========================
+   Home Page Visual
+========================= */
+
+header {
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+}
+
+header .subtitle {
+  font-size: 13px;
+  font-weight: normal;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.hero {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.hero h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.hero p {
+  font-size: 14px;
+  color: #666;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.menu-card .icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.menu-card .title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.menu-card .desc {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+  text-align: center;
+}
