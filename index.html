@@ -1,49 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的旅行助手</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>旅行 Web App</title>
+
+  <!-- 全站共用 CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
 
-    <header>
-      ✈️ 我的旅行助手
-      <div class="subtitle">Travel Smart, Travel Easy</div>
-    </header>
+<header>
+  📱 我的旅行助手
+</header>
 
-    <div class="page">
+<nav>
+  <a href="index.html">首頁</a>
+  <a href="itineraries.html">行程</a>
+  <a href="destinations.html">目的地</a>
+  <a href="packing.html">行李清單</a>
+  <a href="parking.html">停車場</a>
+</nav>
 
-      <section class="hero">
-        <h2>準備好出發了嗎？</h2>
-        <p>一次搞定行李、行程與目的地</p>
-      </section>
+<div class="container">
 
-      <nav class="menu">
-        <a href="packing.html" class="menu-card">
-          <div class="icon">🧳</div>
-          <div class="title">行李清單</div>
-          <div class="desc">避免漏帶重要物品</div>
-        </a>
+  <img
+    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+    alt="travel"
+    class="hero"
+  >
 
-        <a href="itineraries.html" class="menu-card">
-          <div class="icon">🗓</div>
-          <div class="title">行程規劃</div>
-          <div class="desc">安排每日旅遊計畫</div>
-        </a>
-
-        <a href="destinations.html" class="menu-card">
-          <div class="icon">📍</div>
-          <div class="title">目的地</div>
-          <div class="desc">收藏景點與餐廳</div>
-        </a>
-      </nav>
-
-    </div>
-
+  <div class="section">
+    <h2>👋 歡迎使用旅行 Web App</h2>
+    <p>
+      集中管理你的旅遊行程、景點資訊、行李清單與停車場位置，
+      適合手機使用，離線也能快速查看。
+    </p>
   </div>
-</body>
 
+  <div class="card" onclick="location.href='itineraries.html'">
+    <h3>🗓 行程規劃</h3>
+    <p>依天數安排每日行程</p>
+  </div>
+
+  <div class="card" onclick="location.href='destinations.html'">
+    <h3>📍 目的地</h3>
+    <p>景點介紹＋地址＋電話＋官網</p>
+  </div>
+
+  <div class="card" onclick="location.href='packing.html'">
+    <h3>🧳 行李清單</h3>
+    <p>出發前不再漏帶東西</p>
+  </div>
+
+  <div class="card" onclick="location.href='parking.html'">
+    <h3>🅿️ 停車場</h3>
+    <p>自駕旅遊停車資訊整理</p>
+  </div>
+
+</div>
+
+</body>
 </html>
