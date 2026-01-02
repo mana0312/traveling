@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>停車場 Parking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>停車場 Parking</header>
+
+<nav>
+  <a href="index.html">首頁</a>
+  <a href="itineraries.html">行程</a>
+  <a href="destinations.html">目的地</a>
+  <a href="parking.html" class="active">停車場</a>
+  <a href="packing.html">行李清單</a>
+</nav>
+
+<div class="container">
+
+  <div class="card">
+    <h2>選擇城市</h2>
+    <select id="citySelect"></select>
+    <div id="hint" class="meta" style="margin-top:8px;color:#1976d2;"></div>
+  </div>
+
+  <div id="parkingList"></div>
+
+</div>
+
+<script>
+/* ======================
+   停車場 JSON 資料
+====================== */
+const PARKING_DATA = {
+  sapporo: {
+    name: "北海道・札幌",
+    parkings: [
+      {
+        name: "札幌站前地下停車場",
+        tag: "市區停車場",
+        address: "北海道札幌市中央區北5條西2丁目",
+        hours: "24 小時",
+        price: "300円 / 30分鐘",
+        capacity: "200 台",
+        map: "札幌駅"
+      },
+      {
+        name: "大通公園地下停車場",
+        tag: "觀光景點",
+        address: "北海道札幌市中央區大通西1丁目",
+        hours: "07:00–22:00",
+        price: "250円 / 30分鐘",
+        capacity: "150 台",
+        map: "大通公園"
+      },
+      {
+        name: "VESSEL INN 札幌中島公園",
+        tag: "飯店附設",
+        address: "北海道札幌市中央區南9條西4丁目",
+        hours: "入住期間",
+        price: "1,500円 / 晚",
+        capacity: "需預約",
+        map: "VESSEL INN SAPPORO NAKAJIMA PARK"
+      }
+    ]
+  },
+
+  tokyo: {
+    name: "東京",
+    parkings: [
+      {
+        name: "東京站八重洲地下停車場",
+        tag: "市區停車場",
+        address: "東京都千代田區丸之內",
+        hours: "24 小時",
+        price: "400円 / 30分鐘",
+        capacity: "300 台",
+        map: "東京駅"
+      }
+    ]
+  }
+};
+
+/* ======================
+   初始化
+====================== */
+const citySelect = document.getElementById("citySelect");
+const parkingList = document.getElementById("parkingList");
+const hint = document.getElementById("hint");
+
+function init() {
+  citySelect.innerHTML = Object.keys(PARKING_DATA)
+    .map(k => `<option value="${k}">${PARKING_DATA[k].name}</option>`)
+    .join("");
+
+  citySelect.onchange = () => render(citySelect.value);
+
+  autoSelectFromItinerary();
+}
+
+/* ======================
+   行程 → 停車場關聯
+====================== */
+function autoSelectFromItinerary() {
+  const itinerary = JSON.parse(localStorage.getItem("todayItinerary"));
+  if (itinerary?.city && PARKING_DATA[itinerary.city]) {
+    citySelect.value = itinerary.city;
+    hint.textContent = "📍 根據今日行程自動推薦停車場";
+  }
+  render(citySelect.value);
+}
+
+/* ======================
+   渲染停車場
+====================== */
+function render(cityKey) {
+  const city = PARKING_DATA[cityKey];
+  parkingList.innerHTML = city.parkings.map(p => `
+    <div class="card">
+      <span class="tag">${p.tag}</span>
+      <h2>${p.name}</h2>
+
+      <div class="meta">📍 ${p.address}</div>
+      <div class="meta">⏰ ${p.hours}</div>
+      <div class="meta">💰 ${p.price}</div>
+      <div class="meta">🚗 車位：${p.capacity}</div>
+
+      <iframe
+        class="map"
+        loading="lazy"
+        src="https://www.google.com/maps?q=${encodeURIComponent(p.map)}&output=embed">
+      </iframe>
+    </div>
+  `).join("");
+}
+
+init();
+</script>
+
+</body>
+</html>
